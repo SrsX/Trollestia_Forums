@@ -9,9 +9,11 @@
 		public function userLogin($data)
 		{
 		}
+
 		public function adminLogin($data)
 		{
 		}
+
 		private function detectLoginType($data)
 		{
 		}
