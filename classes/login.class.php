@@ -6,10 +6,10 @@
 	
 	class Login
 	{
-		public function userLogin($)
+		public function userLogin($data)
 		{
 		}
-		public function adminLogin()
+		public function adminLogin($data)
 		{
 		}
 		private function detectLoginType($data)
