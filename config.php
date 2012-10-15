@@ -20,5 +20,5 @@
 	define('Character_Set','utf-8'); //change this if needed to
 	define('Community_Name','Giantcrabby'); //change to your community's name
 	define('Language','en'); //change to your site's language
-	define('htaccess_Write', true); //set to false if you do not have .htaccess write access
+	define('htaccess_Write', TRUE); //set to false if you do not have .htaccess write access
 ?>

@@ -4,17 +4,17 @@
 		http_send_status(403);
 	}
 
-    class Encrypt
-    {
-        public function dataSerialize($obj)
-        {
-		    $return = base64_encode(bzcompress(serialize($obj)));
+	class Encrypt
+	{
+		public function dataSerialize($obj)
+		{
+			$return = base64_encode(bzcompress(serialize($obj)));
 			return $return;
 		}
 
 		public function dataUnserialize($obj)
 		{
-		    $return = unserialize(bzuncompress(base64_decode($obj)));
+			$return = unserialize(bzuncompress(base64_decode($obj)));
 			return $return;
 		}
 
@@ -28,7 +28,7 @@
 
 		public function htmlClean($obj)
 		{
-		    $return = htmlentities($obj, ENT_QUOTES | ENT_IGNORE, Character_Set);
+			$return = htmlentities($obj, ENT_QUOTES | ENT_IGNORE, Character_Set);
 			return $return;
 		}
 
@@ -52,7 +52,7 @@
 
 			$data['object_1'] = mt_rand().mt_rand();
 			$data['object_2'] = mt_rand().mt_rand();
-		    $return = $this -> universalEncrypt($data['object_1'],$data['object_2']);
+			$return = $this -> universalEncrypt($data['object_1'],$data['object_2']);
 			return $return;
 		}
 	}
