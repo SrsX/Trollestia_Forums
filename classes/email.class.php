@@ -8,11 +8,17 @@
 	{
 		public function sendEmail($data)
 		{
-			$validEmail = $this -> checkEmail($data['email']);
+			$validEmail = $this -> checkEmail($data['to_email']);
 			if($validEmail == TRUE)
 			{
-				
+				$final_data = $this -> buildEmail($data);
+				$return = @mail($final_data['to_email'],$final_data['email_subject'],$final_data['email_content'],$final_data['email_headers']);
 			}
+			else
+			{
+				$return = FALSE;
+			}
+			return $return;
 		}
 
 		public function checkEmail($data)
@@ -44,27 +50,64 @@
 
 			if(!$valid)
 			{
-				return false;
+				return FALSE;
 			}
 
 			list($data['prefix'], $data['domain']) = split("@",$data['email']);
 
 			if(function_exists("checkdnsrr") && checkdnsrr($data['domain'] . '.', 'MX'))
 			{
-				return true;
+				return TRUE;
 			}
 			elseif(function_exists("getmxrr") && getmxrr($data['domain'], $mxhosts))
 			{
-				return true;
+				return TRUE;
 			}
 			elseif(@fsockopen($data['domain'], 25, $errno, $errstr, 5))
 			{
-				return true;
+				return TRUE;
 			}
 			else
 			{
-				return false;
+				return FALSE;
 			}
+		}
+		
+		private buildEmail($data)
+		{
+			ob_start();
+			phpinfo();
+			$phpinfo = ob_get_contents();
+			ob_end_clean();
+
+			$headers = array();
+			$headers[] = 'MIME-Version: 1.0';
+			$headers[] = 'Content-type: text/html; charset=utf-8';
+			if(strpos($phpinfo(), "Suhosin") == FALSE)
+			{
+				$headers[] = 'To: "' . $data['to_name'] . '" <'.$data['to_email'].'>';
+				$headers[] = 'From: "' . $data['from_name'] . '" <'.$data['from_email'].'>';
+				$headers[] = 'Subject: ' . $data['email_subject'];
+			}
+			$headers[] = 'Sensitivity: Personal';
+			$headers[] = 'X-Mailer: PHP/' . phpversion();
+			$headers[] = "\r\n";
+			
+			$data['email_headers'] = implode("\r\n", $headers);
+			
+			$data['email_content'] = '
+<html lang="' . Language . '">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>' . $data['email_subject'] . '</title>
+</head>
+<body>
+	<p>Dear ' . $data['to_name'] . ',</p>
+	<p>' . $data['email_content'] . '</p>
+	<p>Yours Faithfully,<br />' . Community_Name . '</p>
+</body>
+</html>';
+			return $data;
 		}
 	}
 ?>

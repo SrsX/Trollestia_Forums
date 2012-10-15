@@ -21,7 +21,7 @@
 			{
 				exit(Community_Name . ' could not establish connection to MySQL: ' . mysqli_connect_error());
 			}
-			@mysqli_select_db(DB_CONNECTION, DB_NAME) OR exit(Community_Name . ' could not select database: ' . mysqli_error());
+			@mysqli_select_db(DB_CONNECTION, DB_NAME) OR error_log('System could not select database: ' . mysqli_error()) and exit();
 			@mysqli_set_charset(DB_CONNECTION, DB_Character_Set);
 		}
 
@@ -33,10 +33,11 @@
 			$info['limit'];
 			$info['order_by'] = array('key_part ASC','key_part DESC');
 			$info['where'] = $this -> dbRealEscapeString($info['where']);
-            $query = mysqli_query($DB_CONNECTION, $info['query']) OR exit('An error has occurred with the database: ' . mysqli_error());
+            $query = mysqli_query($DB_CONNECTION, $info['query']) OR error_log('An error has occurred with the database: ' . mysqli_error()) exit();
 			if(!$query)
 			{
-				exit('Invalid query: ' . mysqli_error());
+				error_log('Invalid query: ' . mysqli_error());
+				exit();
 			}
 			else
 			{
@@ -54,7 +55,8 @@
 			}
 			else
 			{
-				exit('Empty resource: ' . mysqli_error());
+				error_log('Empty resource: ' . mysqli_error());
+				exit();
 			}
 			mysqli_free_result($return);
         }
@@ -64,7 +66,8 @@
 			$return = mysqli_num_rows($info) OR exit('An error has occurred with the database: ' . mysqli_error());
 			if(!$return)
 			{
-	    			exit('Invalid query: ' . mysqli_error());
+	    		error_log('Invalid query: ' . mysqli_error());
+				exit();
 			}
 			else
 			{
@@ -78,7 +81,8 @@
 			$return = mysqli_real_escape_string($DB_CONNECTION,stripslashes(trim($data)));
 			if(!$return)
 			{
-				exit('Invalid query: ' . mysqli_error());
+				error_log('Invalid query: ' . mysqli_error());
+				exit();
 			}
 			else
 			{
@@ -87,5 +91,9 @@
 			mysqli_free_result($return);
 		}
 
+		private function dbBuildQuery($data)
+		{
+			
+		}
     }
 ?>
