@@ -93,7 +93,7 @@
 			$headers[] = 'X-Mailer: PHP/' . phpversion();
 			$headers[] = "\r\n";
 			
-			$data['email_headers'] = implode("\r\n", $headers);
+			$data['email_headers'] = implode(PHP_EOL, $headers);
 			
 			$data['email_content'] = '
 <html lang="' . Language . '">

@@ -8,8 +8,7 @@
     {
 		private function __construct()
 		{
-			$Database = new Database;
-			$Database -> dbConnect();
+			$this -> dbConnect();
 		}
 
 
@@ -21,19 +20,38 @@
 			{
 				exit(Community_Name . ' could not establish connection to MySQL: ' . mysqli_connect_error());
 			}
-			@mysqli_select_db(DB_CONNECTION, DB_NAME) OR error_log('System could not select database: ' . mysqli_error()) and exit();
+			@mysqli_select_db(DB_CONNECTION, DB_NAME) OR error_log('System could not select database: ' . mysqli_error()) AND exit();
 			@mysqli_set_charset(DB_CONNECTION, DB_Character_Set);
 		}
 
 		public function dbQuery($info)
         {
-			$info['query_type'] = array('select,insert,create');
-			$info['row_factor'] = array('*,something_specific');
-			$info['table'];
-			$info['limit'];
-			$info['order_by'] = array('key_part ASC','key_part DESC');
-			$info['where'] = $this -> dbRealEscapeString($info['where']);
-            $query = mysqli_query($DB_CONNECTION, $info['query']) OR error_log('An error has occurred with the database: ' . mysqli_error()) exit();
+			$info['table'] = DB_TABLE_PREFIX.$info['table'];
+
+			if($info['query_type'] == 'SELECT')
+			{
+				$info['query'] = 'SELECT ' . $info['row_factor'] . ' FROM `' . $info['table'] . '`';
+			}
+			elseif($info['query_type'] == 'INSERT')
+			{
+				$info['query'] = 'INSERT ' . $info['row_factor'] . ' INTO `' . $info['table'] . '`';
+			}
+
+			if($info['where'])
+			{
+				$this -> dbRealEscapeString($info['where']);
+				$info['query'] = $info['query'] . ' WHERE ' . $info['where'];
+			}
+			if($info['order_by'])
+			{
+				$info['query'] = $info['query'] . ' ORDER BY ' . $info['order_by'];
+			}
+			if($info['limit'])
+			{
+				$info['query'] = $info['query'] . ' LIMIT ' . $info['limit'];
+			}
+
+            $query = mysqli_query($DB_CONNECTION, $info['query']) OR error_log('An error has occurred with the database: ' . mysqli_error()) AND exit();
 			if(!$query)
 			{
 				error_log('Invalid query: ' . mysqli_error());
@@ -63,7 +81,7 @@
 
 		public function dbNumRows($info)
 		{
-			$return = mysqli_num_rows($info) OR exit('An error has occurred with the database: ' . mysqli_error());
+			$return = mysqli_num_rows($info) OR error_log('An error has occurred with the database: ' . mysqli_error()) AND exit();
 			if(!$return)
 			{
 	    		error_log('Invalid query: ' . mysqli_error());
