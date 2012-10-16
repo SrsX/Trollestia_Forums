@@ -2,6 +2,7 @@
 	if(!defined('Permitted_Page'))
 	{
 		http_send_status(403);
+		exit();
 	}
 
 	define('Main_Protocol','http'); //change this if needed to
@@ -18,7 +19,6 @@
 	define('DB_TABLE_PREFIX', ''); //change this if needed to
 	define('DB_Character_Set','utf8'); //change this if needed to
 	define('Character_Set','utf-8'); //change this if needed to
-	define('Community_Name','Giantcrabby'); //change to your community's name
 	define('Language','en'); //change to your site's language
 	define('htaccess_Write', TRUE); //set to false if you do not have .htaccess write access
 ?>
