@@ -13,9 +13,9 @@
 			$Database = new Database;
 			$Email = new Email;
 
-			$Encrypt -> htmlClean($data['email']);
-			$Encrypt -> htmlClean($data['password']);
-			$Encrypt -> htmlClean($data['username']);
+			$Database -> dbRealEscapeString($Encrypt -> htmlClean($data['email']));
+			$Database -> dbRealEscapeString($Encrypt -> htmlClean($data['password']));
+			$Database -> dbRealEscapeString($Encrypt -> htmlClean($data['username']));
 			
 			if($Email -> checkEmail($data['email']))
 			{

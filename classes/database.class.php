@@ -52,7 +52,6 @@
 
 			if($info['where'])
 			{
-				$this -> dbRealEscapeString($info['where']);
 				$info['query'] = $info['query'] . ' WHERE ' . $info['where'];
 			}
 			if($info['order_by'])
