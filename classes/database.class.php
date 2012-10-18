@@ -67,7 +67,7 @@
             $query = @mysqli_query($DB_CONNECTION, $info['query']) OR error_log('An error has occurred with the database: ' . mysqli_error($DB_CONNECTION)) AND exit();
 			if(!$query)
 			{
-				error_log('Invalid query: ' . mysqli_error());
+				error_log('Invalid query: ' . mysqli_error($DB_CONNECTION));
 				exit();
 			}
 			else
@@ -97,7 +97,7 @@
 			$return = @mysqli_num_rows($info) OR error_log('An error has occurred with the database: ' . mysqli_error($DB_CONNECTION)) AND exit();
 			if(!$return)
 			{
-				error_log('Invalid query: ' . mysqli_error());
+				error_log('Invalid query: ' . mysqli_error($DB_CONNECTION));
 				exit();
 			}
 			else
@@ -112,7 +112,7 @@
 			$return = mysqli_real_escape_string($DB_CONNECTION,stripslashes(trim($data)));
 			if(!$return)
 			{
-				error_log('Invalid query: ' . mysqli_error());
+				error_log('Invalid query: ' . mysqli_error($DB_CONNECTION));
 				exit();
 			}
 			else

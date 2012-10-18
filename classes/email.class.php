@@ -13,7 +13,17 @@
 			if($validEmail == TRUE)
 			{
 				$final_data = $this -> buildEmail($data);
-				$return = @mail($final_data['to_email'],$final_data['email_subject'],$final_data['email_content'],$final_data['email_headers']);
+				require_once 'PEAR/Info.php';
+				if(PEAR_Dependency::checkPackage('Mail'))
+				{
+					include('Mail.php');
+					$mail_object =& Mail::factory('sendmail',$final_data['params']);
+					$return = $mail_object->send($final_data['to_email'],$final_data['email_headers'],$final_data['email_content']);
+				}
+				else
+				{
+					$return = @mail($final_data['to_email'],$final_data['email_subject'],$final_data['email_content'],$final_data['email_headers']);
+				}
 			}
 			else
 			{
@@ -76,26 +86,20 @@
 		
 		private buildEmail($data)
 		{
-			ob_start();
-			phpinfo();
-			$phpinfo = ob_get_contents();
-			ob_end_clean();
-
 			$headers = array();
-			$headers[] = 'MIME-Version: 1.0';
-			$headers[] = 'Content-type: text/html; charset=utf-8';
-			if(strpos($phpinfo(), "Suhosin") == FALSE)
-			{
-				$headers[] = 'To: "' . $data['to_name'] . '" <'.$data['to_email'].'>';
-				$headers[] = 'From: "' . $data['from_name'] . '" <'.$data['from_email'].'>';
-				$headers[] = 'Subject: ' . $data['email_subject'];
-			}
-			$headers[] = 'Sensitivity: Personal';
-			$headers[] = 'X-Mailer: PHP/' . phpversion();
+			$headers['MIME-Version'] = 'MIME-Version: 1.0';
+			$headers['Content-type'] = 'Content-type: text/html; charset=utf-8';
+			$headers['To'] = 'To: "' . $data['to_name'] . '" <'.$data['to_email'].'>';
+			$headers['From'] = 'From: "' . $data['from_name'] . '" <'.$data['from_email'].'>';
+			$headers['Subject'] = 'Subject: ' . $data['email_subject'];
+			$headers['Sensitivity'] = 'Sensitivity: Personal';
 			$headers[] = "\r\n";
 			
 			$data['email_headers'] = implode(PHP_EOL, $headers);
-			
+
+			$data['params'] = array();
+			$data['params']['sendmail_path'] = '/usr/lib/sendmail';
+
 			$data['email_content'] = '
 <html lang="' . Language . '">
 <head>
