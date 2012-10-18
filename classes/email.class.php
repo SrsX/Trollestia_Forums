@@ -13,10 +13,10 @@
 			if($validEmail == TRUE)
 			{
 				$final_data = $this -> buildEmail($data);
-				require_once 'PEAR/Info.php';
+				require_once('PEAR/Info.php');
 				if(PEAR_Dependency::checkPackage('Mail'))
 				{
-					include('Mail.php');
+					require_once('Mail.php');
 					$mail_object =& Mail::factory('sendmail',$final_data['params']);
 					$return = $mail_object->send($final_data['to_email'],$final_data['email_headers'],$final_data['email_content']);
 				}
@@ -93,7 +93,7 @@
 			$headers['From'] = 'From: "' . $data['from_name'] . '" <'.$data['from_email'].'>';
 			$headers['Subject'] = 'Subject: ' . $data['email_subject'];
 			$headers['Sensitivity'] = 'Sensitivity: Personal';
-			$headers[] = "\r\n";
+			$headers[] = PHP_EOL;
 			
 			$data['email_headers'] = implode(PHP_EOL, $headers);
 
