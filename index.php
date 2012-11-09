@@ -7,7 +7,7 @@
 
 	$smarty = new Smarty;
 
-	require_once('lang.php');
+	require_once('languages/lang.php');
 
 	$smarty->assign('system_info', array(
 	'community_name' => 'Something',
