@@ -12,9 +12,9 @@
 		<meta name="author" lang="{Language}" content="mailto: {$system_info.system_email}" />
 		<meta name="robots" content="ALL" />
 		<!--[if lt IE 9]>
-			<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script type="text/javascript" src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<script type="text/javascript" src="include/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="include/js/login.js"></script>
 	</head>

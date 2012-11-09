@@ -1,5 +1,5 @@
 <?php
-	define('Permitted_Page', TRUE)
+	define('Permitted_Page', TRUE);
 
 	require_once('config.php');
 
