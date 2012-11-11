@@ -1,4 +1,5 @@
-﻿<form class="form-horizontal" name="login_form" onsubmit="login(); return FALSE;">
+﻿{include file="header.tpl"}
+<form class="form-horizontal" name="login_form" onsubmit="login(); return FALSE;">
 	<div id="login_return"></div>
 	<label class="control-label" for="inputEmail">{$_LANG.email}</label>
 	<div class="controls">
@@ -22,3 +23,4 @@
 		</div>
 	</div>
 </form>
+{include file="footer.tpl"}
