@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	if(!defined('Permitted_Page'))
 	{
 		if(function_exists('http_response_code'))
@@ -15,11 +15,9 @@
 		}
 		exit();
 	}
-	
-$_LANG = array();
-$_LANG['lang'] = "en";
-$_LANG['login'] = "Login";
-$_LANG['email'] = "Email";
-$_LANG['password'] = "Password";
-$_LANG['remember_me'] = "Remember Me";
-?>
+
+	echo '
+		<footer>' . PHP_EOL . '
+		</footer>' . PHP_EOL . '
+	</body>' . PHP_EOL . '
+</HTML>' . PHP_EOL;

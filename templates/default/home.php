@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	if(!defined('Permitted_Page'))
 	{
 		if(function_exists('http_response_code'))
@@ -15,11 +15,9 @@
 		}
 		exit();
 	}
-	
-$_LANG = array();
-$_LANG['lang'] = "en";
-$_LANG['login'] = "Login";
-$_LANG['email'] = "Email";
-$_LANG['password'] = "Password";
-$_LANG['remember_me'] = "Remember Me";
-?>
+
+	require_once($system_info['templates_dir'] . 'header.php');
+
+	echo 'Welcome to the home page!' . PHP_EOL;
+
+	require_once($system_info['templates_dir'] . 'footer.tpl');

@@ -18,7 +18,7 @@
 
 	if(Language == 'en')
 	{
-		require_once('en.php');
+		require_once($system_info['languages_dir'] . 'en.php');
 	}
 	else
 	{
