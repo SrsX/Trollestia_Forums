@@ -4,42 +4,43 @@
 	require_once('config.php');
 	require_once($system_info['languages_dir'] . 'lang.php');
 
-	if($_GET['p'])
-	{
-		$system_info['current_page'] = $_GET['p'] . ".php";
-		$system_info['current_page_name'] = $_GET['p'];
-	}
-	elseif($system_info['current_page'] == "")
-	{
-		$system_info['current_page'] = $system_info['default_page'];
-		$system_info['current_page_name'] = preg_replace("/\\.[^.\\s]{3,4}$/", "", $system_info['current_page']);
-	}
-	$system_info['title'] = $system_info['community_name'] . " - " . $system_info['current_page_name'];
-
-	$display_page = $system_info['templates_dir'] . $system_info['current_page'];
-
-	if(!file_exists($display_page))
-	{
-		$display_page = $system_info['404_page'];
-
-		if(!file_exists($display_page))
-		{
-			if(function_exists('http_response_code'))
-			{
-				http_response_code(404);
-			}
-			elseif(function_exists('http_send_status'))
-			{
-				http_send_status(404);
-			}
-			else
-			{
-				header('Status-Code: 404 Not Found' . PHP_EOL);
-			}
-			error_log("The default 404 page could not be found.");
-			exit("Oh no! Page not found!");
-		}
-	}
-
-	require_once($display_page);
+	echo '
+<!DOCTYPE HTML>
+<HTML lang="' . $_LANG['lang'] . '">
+	<head>
+		<title>' . $system_info['community_name'] . ' - ' . $_LANG['home'] . '</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=' . $system_info['character_set'] . '" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta name="copyright" lang="' . $_LANG['lang'] . '" content="&copy; ' . $system_info['community_name'] . '" />
+		<meta name="author" lang="' . $_LANG['lang'] . '" content="mailto: ' . $system_info['email'] . '" />
+		<meta name="robots" content="ALL" />
+		<link rel="icon" href="' . $system_info['website_css'] . 'images/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" type="image/x-icon" href="' . $system_info['website_css'] . 'images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<link rel="stylesheet" type="text/css" href="' . $system_info['website_css'] . 'style.css" />
+		<!--[if lt IE 9]><script type="text/javascript" src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	</head>
+	<body>
+		<div data-role="page" id="home">
+			<div data-theme="a" data-role="header">
+				<h3>' . $_LANG['home'] . '</h3>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="index.php" class="ui-btn-active ui-state-persist">Home</a></li>
+						<li><a href="login.php#login" data-rel="dialog" data-transition="pop">Login</a></li>
+						<li><a href="register.php#register" data-rel="dialog" data-transition="pop">Register</a></li>
+					</ul>
+				</div>
+			</div>
+			<div data-role="content">
+				<div>Welcome to home.</div>
+			</div>
+			<div data-theme="d" data-role="footer">
+				<h3>' . $system_info['community_name'] . ' &copy;</h3>
+			</div>
+		</div>
+	</body>
+</HTML>';
 ?>

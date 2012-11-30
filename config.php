@@ -27,9 +27,7 @@
 
 	$system_info = array();
 
-	$system_info['default_protocol'] = "http";
-	$system_info['default_template'] = "default";
-	$system_info['default_page'] = "home.php";
+	$system_info['default_protocol'] = "http://";
 
 	$system_info['community_name'] = "Something";
 	$system_info['email'] = 'something@something.com';
@@ -37,12 +35,9 @@
 
 	$system_info['root_dir'] = realpath(__DIR__);
 	$system_info['languages_dir'] = $system_info['root_dir'] . "/languages/";
-	$system_info['classes_dir'] = $system_info['root_dir'] . "/include/php/classes/";
-	$system_info['templates_dir'] = $system_info['root_dir'] . "/templates/" . $system_info['default_template'] . "/";
+	$system_info['include_dir'] = $system_info['root_dir'] . "/include/";
 
-	$system_info['website'] = $system_info['default_protocol'] . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
-	$system_info['website_css'] = $system_info['website'] . "/templates/" . $system_info['default_template'] . "/include/css/";
-	$system_info['website_js'] = $system_info['website'] . "/templates/" . $system_info['default_template'] . "/include/js/";
-
-	$system_info['404_page'] = $system_info['templates_dir'] . "404.php";
+	$system_info['website'] = "";
+	$system_info['website_css'] = $system_info['website'] . "include/css/";
+	$system_info['website_js'] = $system_info['website'] . "include/js/";
 ?>

@@ -11,13 +11,14 @@
 		}
 		else
 		{
-			header('Status-Code: 403 Forbidden' . PHP_EOL);
+			header('Status-Code: 403 Forbidden');
 		}
 		exit();
 	}
-	
+
 $_LANG = array();
 $_LANG['lang'] = "en";
+$_LANG['home'] = "Home";
 $_LANG['login'] = "Login";
 $_LANG['email'] = "Email";
 $_LANG['password'] = "Password";
