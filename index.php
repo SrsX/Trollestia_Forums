@@ -29,13 +29,40 @@
 				<div data-role="navbar">
 					<ul>
 						<li><a href="index.php" class="ui-btn-active ui-state-persist">Home</a></li>
-						<li><a href="login.php#login" data-rel="dialog" data-transition="pop">Login</a></li>
+						<li><a href="#login" data-rel="dialog" data-transition="pop">Login</a></li>
 						<li><a href="register.php#register" data-rel="dialog" data-transition="pop">Register</a></li>
 					</ul>
 				</div>
 			</div>
 			<div data-role="content">
 				<div>Welcome to home.</div>
+			</div>
+			<div data-theme="d" data-role="footer">
+				<h3>' . $system_info['community_name'] . ' &copy;</h3>
+			</div>
+		</div>
+		<div data-role="page" id="login">
+			<div data-theme="a" data-role="header">
+				<h3>' . $_LANG['login'] . '</h3>
+			</div>
+			<div data-role="content">
+				<form action="login.php" method="post">
+					<div data-role="fieldcontain">
+						<label for="login_email">' . $_LANG['email'] . ':</label>
+						<input type="email" name="login_email" id="login_email" value="" placeholder="' . $_LANG['email'] . '" data-mini="true" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="login_password">' . $_LANG['password'] . ':</label>
+						<input type="password" name="login_password" id="login_password" value="" placeholder="' . $_LANG['password'] . '" data-mini="true" />
+					</div>
+					<div data-role="fieldcontain">
+						<label for="remember_me">' . $_LANG['remember_me'] . '</label>
+						<input type="checkbox" name="remember_me" id="remember_me" data-mini="true" />
+					</div>
+					<div data-role="fieldcontain" class="login_button">
+						<input type="submit" name="login_submit" id="login_submit" value="' . $_LANG['login'] . '" data-mini="true" />
+					</div>
+				</form>
 			</div>
 			<div data-theme="d" data-role="footer">
 				<h3>' . $system_info['community_name'] . ' &copy;</h3>

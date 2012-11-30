@@ -20,6 +20,9 @@
 	{
 		public function userLogin($data)
 		{
+			require_once($system_info['include_dir'] . 'php/classes/encrypt.class.php');
+			require_once($system_info['include_dir'] . 'php/classes/database.class.php');
+
 			$Encrypt = new Encrypt;
 			$Database = new Database;
 
