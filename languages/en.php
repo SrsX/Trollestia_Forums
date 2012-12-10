@@ -20,6 +20,7 @@ $_LANG = array();
 $_LANG['lang'] = "en";
 $_LANG['home'] = "Home";
 $_LANG['login'] = "Login";
+$_LANG['register'] = "Register";
 $_LANG['email'] = "Email";
 $_LANG['password'] = "Password";
 $_LANG['remember_me'] = "Remember Me";

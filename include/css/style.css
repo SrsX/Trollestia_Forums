@@ -8,14 +8,15 @@
 	text-align: center;
 }
 
-.login{
-	padding: 10px;
-	width: 50%;
-	margin: auto;
+@media screen and (min-width: 481px){
+	.login{
+		padding: 10px;
+		width: 50%;
+		margin: auto;
+	}
 }
 
 .login_button{
-	width: 35%;
 	margin: auto;
 	text-align: center;
 }

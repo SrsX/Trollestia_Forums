@@ -45,13 +45,12 @@
 	}
 
 	echo '
-<!DOCTYPE HTML>
-<HTML lang="' . $_LANG['lang'] . '">
+<!DOCTYPE html>
+<html lang="' . $_LANG['lang'] . '">
 	<head>
 		<title>' . $system_info['community_name'] . ' - ' . $_LANG['login'] . '</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=' . $system_info['character_set'] . '" />
-		<meta http-equiv="Content-Style-Type" content="text/css" />
-		<meta name="copyright" lang="' . $_LANG['lang'] . '" content="&copy; ' . $system_info['community_name'] . '" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 		<meta name="author" lang="' . $_LANG['lang'] . '" content="mailto: ' . $system_info['email'] . '" />
 		<meta name="robots" content="ALL" />
 		<link rel="icon" href="' . $system_info['website_css'] . 'images/favicon.ico" type="image/x-icon" />
@@ -68,31 +67,36 @@
 				<h3>' . $_LANG['login'] . '</h3>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="index.php">Home</a></li>
-						<li><a href="login.php" data-rel="dialog" data-transition="pop" class="ui-btn-active ui-state-persist">Login</a></li>
-						<li><a href="register.php" data-rel="dialog" data-transition="pop">Register</a></li>
+						<li><a href="index.php">' . $_LANG['home'] . '</a></li>
+						<li><a href="login.php" data-rel="dialog" data-transition="pop" class="ui-btn-active ui-state-persist">' . $_LANG['login'] . '</a></li>
+						<li><a href="register.php" data-rel="dialog" data-transition="pop">' . $_LANG['register'] . '</a></li>
 					</ul>
 				</div>
 			</div>
 			<div data-role="content">
 				<div class="login">
 					' . $message . '
-					<form action="" method="post">
-						<div data-role="fieldcontain">
-							<label for="login_email">' . $_LANG['email'] . ':</label>
-							<input type="email" name="login_email" id="login_email" value="" placeholder="' . $_LANG['email'] . '" data-mini="true" />
-						</div>
-						<div data-role="fieldcontain">
-							<label for="login_password">' . $_LANG['password'] . ':</label>
-							<input type="password" name="login_password" id="login_password" value="" placeholder="' . $_LANG['password'] . '" data-mini="true" />
-						</div>
-						<div data-role="fieldcontain">
-							<label for="remember_me">' . $_LANG['remember_me'] . '</label>
-							<input type="checkbox" name="remember_me" id="remember_me" data-mini="true" />
-						</div>
-						<div data-role="fieldcontain" class="login_button">
-							<input type="submit" name="login_submit" id="login_submit" value="' . $_LANG['login'] . '" data-mini="true" />
-						</div>
+					<form action="login.php" method="post">
+						<ul data-role="listview" data-inset="true" data-theme="c">
+							<li data-role="fieldcontain">
+								<label for="login_email">' . $_LANG['email'] . ':</label>
+								<input type="email" name="login_email" id="login_email" value="" placeholder="' . $_LANG['email'] . '" data-mini="true" />
+							</li>
+							<li data-role="fieldcontain">
+								<label for="login_password">' . $_LANG['password'] . ':</label>
+								<input type="password" name="login_password" id="login_password" value="" placeholder="' . $_LANG['password'] . '" data-mini="true" />
+							</li>
+							<li data-role="fieldcontain">
+								<label for="remember_me">' . $_LANG['remember_me'] . '</label>
+								<input type="checkbox" name="remember_me" id="remember_me" data-mini="true" />
+							</li>
+							<li>
+								<fieldset class="ui-grid-a">
+									<div class="ui-block-a"><div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="b" aria-disabled="false"><input type="submit" name="login_submit" id="login_submit" value="' . $_LANG['login'] . '" data-mini="true" data-theme="b" /></div></div>
+									<div class="ui-block-b"><div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" aria-disabled="false"><a href="register.php" data-role="button" data-theme="a" aria-disabled="false" data-mini="true">Register</a></div></div>
+								</fieldset>
+							</li>
+						</ul>
 					</form>
 				</div>
 			</div>
@@ -101,5 +105,5 @@
 			</div>
 		</div>
 	</body>
-</HTML>';
+</html>';
 ?>
